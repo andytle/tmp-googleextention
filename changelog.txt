@@ -1,0 +1,16 @@
+# Changelog
+
+## [1.0.0] - 2018-12-30
+### Added
+- Simple function that allows user to see RateMyProfessor score when hovering over the Professor's name on Schedule of classes page
+- Initial codebase
+
+
+## [2.0.0] - 2021-04-22
+
+### Added
+- Start using "changelog" to keep track of versions
+
+### Changed
+- Change manifest.json data to match the new version
+- Logic change, now adds a feature that show the Professor's RateMyProfessor page when hover/click on.
