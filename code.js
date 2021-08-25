@@ -13,44 +13,51 @@ $( document ).ready(function() {
         });
         return json;
     })(); 
-    
+
     $('table tbody tr').each(function(){
         var count = 0;
-        $(this).find('td font').each(function(){
-            count = count + 1;
-            if (count == 12){
-                $(this).mouseenter(function(){    
-                    var index;
+        $(this).find('td').each(function(){
+            var td = $(this);
+            $(this).find('font').each(function(){
+                count = count + 1;
+                if (count == 12){
+                    var rating = -1;
+                    var profName = $(this).html().split('<')[0].replace(/,/g,"").trim();
                     var message = "";
                     for (var i = 0; i< json.length; i++){
-                        if ($(this).html().split('<')[0] == json[i].tFname + " " + json[i].tLname){
-                            index = i;  
+                        if (profName == json[i].tFname + " " + json[i].tLname){                        
+                            $(this).wrap('<a href='+ rmu_link + json[i].tid + '/>');
+                            message = message + profName + "<br>";
+                            message = message + "Score: " + json[i].overall_rating + "<br>";
+                            message = message + json[i].tNumRatings + " ratings";
+                            rating = json[i].overall_rating;
                             break;
                         }
-                        else 
-                            index = -1;
                     }
-                    
-                    if (index == -1)
-                        message = message + $(this).html().split('<')[0] + "<br>Data Not Found";
-                    else {
-                        message = message + $(this).html().split('<')[0] + "<br>";
-                        message = message + "Score: " + json[index].overall_rating + "<br>";
-                        message = message + json[index].tNumRatings + " ratings";
-                        $(this).wrap('<a href='+ rmu_link + json[index].tid + '/>');
+                    if (message == "") {
+                        message = profName + "<br>Data Not Found";
                     }
-                    
-                    if ($(this).html().split('<')[0].trim() != "&nbsp;" &&
-                        $(this).html().split('<')[0].trim() != ""){
-                        tippy(this, {
-                            content: message,
-                            animateFill: false,
-                            animation: 'fade',
-                            duration: [200,200]
-                        });
+                    if (!isNaN(rating) && rating != -1) {
+                        if (rating < 3) {
+                            td.css("background-color", "red");
+                        } else if (rating < 4) {
+                            td.css("background-color", "yellow");
+                        } else {
+                            td.css("background-color", "LightGreen");
+                        }
                     }
-                });
-            };
+                    $(this).mouseenter(function(){    
+                        if (profName != ""){
+                            tippy(this, {
+                                content: message,
+                                animateFill: false,
+                                animation: 'fade',
+                                duration: [200,200]
+                            });
+                        }
+                    });
+                };
+            });    
         });
     });
 });
