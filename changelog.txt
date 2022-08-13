@@ -18,6 +18,9 @@
 
 ## [2.1.0] - 2022-08-13
 
+### Added
+- Add style to popup.html file
+
 ### Updated
 - Update the dpu_rmp_data.json to get the latest updated data
 
