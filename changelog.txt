@@ -14,3 +14,12 @@
 ### Changed
 - Change manifest.json data to match the new version
 - Logic change, now adds a feature that show the Professor's RateMyProfessor page when hover/click on.
+
+
+## [2.1.0] - 2022-08-13
+
+### Updated
+- Update the dpu_rmp_data.json to get the latest updated data
+
+### Changed
+- Change the approach to get the number of prefessors in scraper.py file

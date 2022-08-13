@@ -25,10 +25,10 @@ class RateMyProfScraper:
 
 	def GetNumOfProfessors(self,id):
 		page = requests.get(
-			"http://www.ratemyprofessors.com/filter/professor/?&page=1&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=" + str(
+			"http://www.ratemyprofessors.com/filter/professor/?&page=2&filter=teacherlastname_sort_s+asc&query=*%3A*&queryoption=TEACHER&queryBy=schoolId&sid=" + str(
 					id)) 
 		temp_jsonpage = json.loads(page.content)
-		num_of_prof = temp_jsonpage['remaining'] + 20  
+		num_of_prof = temp_jsonpage['searchResultsTotal']
 		return num_of_prof
 
 	def exportData(self):
